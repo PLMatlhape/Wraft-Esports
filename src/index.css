@@ -1,0 +1,94 @@
+/* ===========================================================
+   Wraft — Design Tokens
+   Palette swaps the reference's red circuitry for an electric
+   cyan-blue system: cooler, more "signal/network" than "combat".
+=========================================================== */
+:root {
+  --color-bg: #05080d;
+  --color-bg-raised: #0a0f18;
+  --color-cyan: #00e5ff;
+  --color-cyan-soft: #5cf4ff;
+  --color-blue-deep: #0a2a4d;
+  --color-blue-mid: #123a63;
+  --color-text-primary: #eaf6fb;
+  --color-text-muted: #7c93a8;
+  --color-border: rgba(0, 229, 255, 0.16);
+
+  --font-display: 'Rajdhani', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --container-max: 1280px;
+  --space-section: clamp(64px, 8vw, 120px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* Respect reduced-motion preferences across all animated elements */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus (accessibility floor) */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
