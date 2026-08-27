@@ -1,10 +1,6 @@
 /* ===========================================================
    Wraft — Design Tokens
-   Palette swaps the reference's red circuitry for an electric
-   cyan-blue system: cooler, more "signal/network" than "combat".
 =========================================================== */
-/* Zina-Regular: served from /public (see public/Font/.../fonts/README.txt) so a
-   missing binary never breaks the build — it just falls back to Anton below. */
 @font-face {
   font-family: 'Zina-Regular';
   src: url('/Font/Zina_Complete/Fonts/WEB/fonts/Zina-Regular.woff2') format('woff2'),
@@ -34,14 +30,8 @@
   --space-section: clamp(64px, 8vw, 120px);
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--color-bg);
@@ -56,59 +46,16 @@ h1, h2, h3, h4 {
   margin: 0;
   letter-spacing: 0.01em;
 }
-
-p {
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: var(--font-body);
-  cursor: pointer;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 32px;
-}
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); cursor: pointer; }
+img { max-width: 100%; display: block; }
+.container { max-width: var(--container-max); margin: 0 auto; padding: 0 32px; }
 
 @media (max-width: 640px) {
-  .container {
-    padding: 0 20px;
-  }
+  .container { padding: 0 20px; }
 }
 
-/* Respect reduced-motion preferences across all animated elements */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Visible keyboard focus (accessibility floor) */
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--color-cyan);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* ===========================================================
-   Motion system — scroll reveals + page transitions
-=========================================================== */
 .reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -116,35 +63,28 @@ button:focus-visible {
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
-
-.reveal--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.page-fade {
-  animation: page-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
+.reveal--visible { opacity: 1; transform: translateY(0); }
+.page-fade { animation: page-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 
 @keyframes page-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
-
-  .page-fade {
-    animation: none;
-  }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .page-fade { animation: none; }
 }
