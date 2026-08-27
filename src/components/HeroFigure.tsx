@@ -3,26 +3,42 @@ import fallbackImg from '../images/wraft_home.png'
 import './HeroFigure.css'
 
 const frameModules = import.meta.glob('../images/Home/Wraft_F*.png', { eager: true, import: 'default' }) as Record<string, string>
-const FRAMES: string[] = Array.from({ length: 7 }, (_, index) => frameModules[`../images/Home/Wraft_F${index}.png`]).filter((url): url is string => Boolean(url))
+const FRAMES: string[] = Object.entries(frameModules)
+  .sort(([a], [b]) => Number(a.match(/Wraft_F(\d+)/)?.[1] ?? 999) - Number(b.match(/Wraft_F(\d+)/)?.[1] ?? 999))
+  .map(([, url]) => url)
 const FRAME_DURATION_MS = 260
 
 export default function HeroFigure() {
   const frames = framesOrFallback()
   const [frameIndex, setFrameIndex] = useState(0)
-  const [hasPlayed, setHasPlayed] = useState(false)
   const prefersReducedMotion = useMemo(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches, [])
 
   useEffect(() => {
-    if (prefersReducedMotion || frames.length <= 1 || hasPlayed) return
-    const preloaded = frames.map((src) => { const image = new Image(); image.src = src; return image })
+    if (prefersReducedMotion || frames.length <= 1) return
     let index = 0
-    const id = window.setInterval(() => {
+    let id = 0
+    let cancelled = false
+
+    const preloaded = frames.map((src) => {
+      const image = new Image()
+      image.src = src
+      return image
+    })
+
+    const advance = () => {
+      if (cancelled) return
       index += 1
-      setFrameIndex(Math.min(index, frames.length - 1))
-      if (index >= frames.length - 1) { setHasPlayed(true); window.clearInterval(id) }
-    }, FRAME_DURATION_MS)
-    return () => { window.clearInterval(id); preloaded.forEach((image) => { image.onload = null; image.onerror = null }) }
-  }, [frames, hasPlayed, prefersReducedMotion])
+      setFrameIndex(index)
+      if (index < frames.length - 1) id = window.setTimeout(advance, FRAME_DURATION_MS)
+    }
+
+    id = window.setTimeout(advance, FRAME_DURATION_MS)
+    return () => {
+      cancelled = true
+      window.clearTimeout(id)
+      preloaded.forEach((image) => { image.onload = null; image.onerror = null })
+    }
+  }, [frames, prefersReducedMotion])
 
   const activeIndex = prefersReducedMotion ? frames.length - 1 : frameIndex
   return <div className="hero-figure" aria-hidden="true">
