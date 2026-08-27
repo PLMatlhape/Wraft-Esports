@@ -6,7 +6,7 @@ const frameModules = import.meta.glob('../images/Home/Wraft_F*.png', { eager: tr
 const FRAMES: string[] = Object.entries(frameModules)
   .sort(([a], [b]) => Number(a.match(/Wraft_F(\d+)/)?.[1] ?? 999) - Number(b.match(/Wraft_F(\d+)/)?.[1] ?? 999))
   .map(([, url]) => url)
-const FRAME_DURATION_MS = 260
+const FRAME_DURATION_MS = 220
 
 export default function HeroFigure() {
   const prefersReducedMotion = useMemo(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches, [])
@@ -19,12 +19,14 @@ export default function HeroFigure() {
     let timer: number | undefined
     let cancelled = false
     const preloaded = frames.map((src) => { const image = new Image(); image.src = src; return image })
+
     const advance = () => {
       if (cancelled) return
-      index += 1
+      index = (index + 1) % frames.length
       setFrameIndex(index)
-      if (index < frames.length - 1) timer = window.setTimeout(advance, FRAME_DURATION_MS)
+      timer = window.setTimeout(advance, FRAME_DURATION_MS)
     }
+
     timer = window.setTimeout(advance, FRAME_DURATION_MS)
     return () => {
       cancelled = true
