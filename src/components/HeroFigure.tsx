@@ -2,38 +2,25 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import fallbackImg from '../images/wraft_home.png'
 import './HeroFigure.css'
 
-// Loads every frame in src/images/Home/ (Wraft_F1.png ... Wraft_F6.png)
-// and sorts them numerically by the trailing number in the filename.
-const frameModules = import.meta.glob('../images/Home/*.png', {
+// The hero animation is a 7-frame sequence: F0 → F6.
+// Keep the list explicit so a missing/renamed asset cannot silently change
+// the animation sequence or make the component fall back unexpectedly.
+const frameModules = import.meta.glob('../images/Home/Wraft_F*.png', {
   eager: true,
   import: 'default',
 }) as Record<string, string>
 
-const FRAMES: string[] = Object.entries(frameModules)
-  .sort(([a], [b]) => {
-    const numA = parseInt(a.match(/(\d+)(?=\.png$)/)?.[0] ?? '0', 10)
-    const numB = parseInt(b.match(/(\d+)(?=\.png$)/)?.[0] ?? '0', 10)
-    return numA - numB
-  })
-  .map(([, url]) => url)
+const FRAMES: string[] = Array.from({ length: 7 }, (_, index) => {
+  const path = `../images/Home/Wraft_F${index}.png`
+  return frameModules[path]
+}).filter((url): url is string => Boolean(url))
 
-// How long each frame stays on screen before advancing. At 160ms the
-// whole 6-frame pass took well under a second — too fast to register
-// as motion, just looked like a jump-cut. ~1.5–2s per frame is what
-// actually sells the "approaching" illusion.
 const FRAME_DURATION_MS = 1800
-const TOTAL_LOOPS = 2
 
-/**
- * Plays through the Wraft_F1 → Wraft_F6 sequence on mount (frames are
- * already pre-sized/pre-positioned by design, so no scaling is applied
- * here — just a straight frame swap). Loops twice, then settles on the
- * final frame.
- */
 export default function HeroFigure() {
   const frames = framesOrFallback()
   const [frameIndex, setFrameIndex] = useState(0)
-  const loopsRef = useRef(0)
+  const frameIndexRef = useRef(0)
   const prefersReducedMotion = useMemo(
     () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     [],
@@ -42,22 +29,27 @@ export default function HeroFigure() {
   useEffect(() => {
     if (prefersReducedMotion || frames.length <= 1) return
 
-    const id = window.setInterval(() => {
-      setFrameIndex((current) => {
-        const next = current + 1
-        if (next < frames.length) return next
+    // Preload every frame before playback starts. This prevents a slow image
+    // request from making the sequence appear to skip or jump.
+    const preloaded = frames.map((src) => {
+      const image = new Image()
+      image.src = src
+      return image
+    })
 
-        loopsRef.current += 1
-        if (loopsRef.current >= TOTAL_LOOPS) {
-          window.clearInterval(id)
-          return frames.length - 1
-        }
-        return 0
-      })
+    const id = window.setInterval(() => {
+      frameIndexRef.current = (frameIndexRef.current + 1) % frames.length
+      setFrameIndex(frameIndexRef.current)
     }, FRAME_DURATION_MS)
 
-    return () => window.clearInterval(id)
-  }, [frames.length, prefersReducedMotion])
+    return () => {
+      window.clearInterval(id)
+      preloaded.forEach((image) => {
+        image.onload = null
+        image.onerror = null
+      })
+    }
+  }, [frames, prefersReducedMotion])
 
   const activeIndex = prefersReducedMotion ? frames.length - 1 : frameIndex
 
@@ -69,6 +61,7 @@ export default function HeroFigure() {
         src={frames[activeIndex]}
         alt=""
         className="hero-figure__img"
+        draggable={false}
       />
 
       <svg className="hero-figure__nodes" viewBox="0 0 420 620">
