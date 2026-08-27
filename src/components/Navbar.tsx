@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import logo from '../images/Wraft_logo.png'
 import './Navbar.css'
 
 interface NavLink {
@@ -28,7 +29,8 @@ export default function Navbar() {
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="container navbar__inner">
         <a href="#home" className="navbar__logo" aria-label="Wraft home">
-          WRAFT
+          <img src={logo} alt="Wraft" className="navbar__logo-img" />
+          <span>WRAFT</span>
         </a>
 
         <nav className="navbar__links" aria-label="Primary">

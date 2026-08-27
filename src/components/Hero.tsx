@@ -11,8 +11,8 @@ export default function Hero() {
             The signal is live — are you ready to deploy?
           </p>
           <h1 className="hero__headline">
-            ENTER
-            <span className="hero__headline-accent">THE GRID</span>
+            GAME
+            <span className="hero__headline-accent">ON</span>
           </h1>
           <div className="hero__rule" />
 
