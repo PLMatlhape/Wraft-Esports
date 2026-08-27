@@ -1,6 +1,6 @@
 import Reveal from './Reveal'
 import './About.css'
-import wraftLogo from '../images/wraft_logo.png'
+import wraftLogo from '../images/wraft_home.png'
 
 const PILLARS = [
   { title: 'Skill Development', body: 'We host local tournaments, training camps, and bootcamps to sharpen our players\' mechanical skills and strategic thinking.' },
@@ -25,21 +25,9 @@ export default function About() {
             <img src={wraftLogo} alt="Wraft Esports" className="about__logo" />
           </Reveal>
         </div>
-
-        <Reveal className="about__mission" delay={100}>
-          <p className="section-eyebrow">Our Mission</p>
-          <p className="about__mission-text">To discover, nurture, and elevate the next generation of competitive gaming talent. We provide young players from our communities with the structure, training, and exposure they need to compete at the highest levels.</p>
-        </Reveal>
-
-        <div className="about__pillars">
-          <Reveal className="about__pillars-title" delay={150}><p className="section-eyebrow">What We Do</p></Reveal>
-          {PILLARS.map((pillar, i) => <Reveal key={pillar.title} delay={180 + i * 90} className="about__pillar"><span className="about__pillar-number">0{i + 1}</span><div><h3>{pillar.title}</h3><p>{pillar.body}</p></div></Reveal>)}
-        </div>
-
-        <Reveal className="about__future" delay={200}>
-          <p className="section-eyebrow">The Future of Township Gaming</p>
-          <p>The talent in ekasi is undeniable, but the opportunities have been limited. We are changing that story. By investing in our youth today, we are building the champions, content creators, and esports leaders of tomorrow.</p>
-        </Reveal>
+        <Reveal className="about__mission" delay={100}><p className="section-eyebrow">Our Mission</p><p className="about__mission-text">To discover, nurture, and elevate the next generation of competitive gaming talent. We provide young players from our communities with the structure, training, and exposure they need to compete at the highest levels.</p></Reveal>
+        <div className="about__pillars"><Reveal className="about__pillars-title" delay={150}><p className="section-eyebrow">What We Do</p></Reveal>{PILLARS.map((pillar, i) => <Reveal key={pillar.title} delay={180 + i * 90} className="about__pillar"><span className="about__pillar-number">0{i + 1}</span><div><h3>{pillar.title}</h3><p>{pillar.body}</p></div></Reveal>)}</div>
+        <Reveal className="about__future" delay={200}><p className="section-eyebrow">The Future of Township Gaming</p><p>The talent in ekasi is undeniable, but the opportunities have been limited. We are changing that story. By investing in our youth today, we are building the champions, content creators, and esports leaders of tomorrow.</p></Reveal>
       </div>
     </section>
   )
