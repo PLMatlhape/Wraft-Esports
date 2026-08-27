@@ -15,7 +15,7 @@ const FRAMES: string[] = Array.from({ length: 7 }, (_, index) => {
   return frameModules[path]
 }).filter((url): url is string => Boolean(url))
 
-const FRAME_DURATION_MS = 1800
+const FRAME_DURATION_MS = 250
 
 export default function HeroFigure() {
   const frames = framesOrFallback()
