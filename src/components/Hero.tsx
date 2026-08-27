@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import HeroFigure from './HeroFigure'
 import FeatureRail from './FeatureRail'
 import './Hero.css'
@@ -5,21 +6,36 @@ import './Hero.css'
 export default function Hero() {
   return (
     <section id="home" className="hero">
+      {/* Full-bleed signal beam: runs from the very top of the page
+          (behind the navbar) down through the bottom of this section,
+          aligned under the image column. */}
+      <div className="hero__beam-wrap" aria-hidden="true">
+        <div className="hero__beam" />
+      </div>
+
       <div className="container hero__grid">
         <div className="hero__copy">
           <p className="hero__eyebrow">
             The signal is live — are you ready to deploy?
           </p>
-          <h1 className="hero__headline">
-            GAME
-            <span className="hero__headline-accent">ON</span>
+
+          {/* "ON" starts directly under the "E" of "GAME": a hidden
+              "GAM" ghost of identical width pushes it into place
+              without hardcoding pixel offsets. */}
+          <h1 className="hero__headline" aria-label="Game On">
+            <span className="hero__headline-line" aria-hidden="true">GAME</span>
+            <span className="hero__headline-line" aria-hidden="true">
+              <span className="hero__headline-ghost">GAM</span>
+              <span className="hero__headline-accent">ON</span>
+            </span>
           </h1>
+
           <div className="hero__rule" />
 
           <div className="hero__actions">
-            <a href="#games" className="hero__cta">
+            <Link to="/games" className="hero__cta">
               Play Now
-            </a>
+            </Link>
             <div className="hero__socials" aria-label="Wraft on social media">
               <a href="#" aria-label="Facebook" className="hero__social-icon">
                 <FacebookIcon />
@@ -42,10 +58,6 @@ export default function Hero() {
           <FeatureRail />
         </div>
       </div>
-
-      <button className="hero__play" aria-label="Play trailer" type="button">
-        <PlayIcon />
-      </button>
     </section>
   )
 }
@@ -75,14 +87,6 @@ function XIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
       <path d="M4 4l16 16M20 4L4 20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function PlayIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path d="M8 5.5v13l11-6.5-11-6.5z" fill="currentColor" />
     </svg>
   )
 }

@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 50;
-  padding: 24px 0;
+  padding: 22px 0;
   transition: background-color 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;
 }
 
@@ -26,31 +26,64 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.08em;
-  color: var(--color-cyan);
-  text-shadow: 0 0 18px rgba(0, 229, 255, 0.55);
+  flex-shrink: 0;
 }
 
 .navbar__logo-img {
-  height: 30px;
+  height: 28px;
   width: auto;
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.45));
 }
 
+.navbar__logo-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
+  text-shadow: 0 0 18px rgba(0, 229, 255, 0.25);
+}
+
+.navbar__logo-e {
+  color: var(--color-cyan);
+  font-size: 1.1em;
+}
+
+.navbar__logo-sports {
+  font-size: 0.52em;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  margin-left: 1px;
+  vertical-align: baseline;
+}
+
+/* Right-aligned cluster: links + actions pinned to the corner, like the reference */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-left: auto;
+}
+
 .navbar__links {
   display: flex;
-  gap: 36px;
+  gap: 26px;
 }
 
 .navbar__link {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
   color: var(--color-text-primary);
   position: relative;
   padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.navbar__link--btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
 }
 
 .navbar__link::after {
@@ -115,7 +148,7 @@
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
   .navbar__links {
     display: none;
   }
@@ -136,5 +169,13 @@
     padding: 14px 0;
     font-size: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: left;
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    color: var(--color-text-primary);
+    width: 100%;
+    font-family: var(--font-body);
   }
 }

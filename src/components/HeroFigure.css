@@ -6,32 +6,6 @@
   aspect-ratio: 420 / 620;
 }
 
-.hero-figure__beam {
-  position: absolute;
-  top: -6%;
-  bottom: -6%;
-  left: 50%;
-  width: 46%;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 229, 255, 0) 0%,
-    rgba(0, 229, 255, 0.28) 20%,
-    rgba(0, 229, 255, 0.4) 50%,
-    rgba(0, 229, 255, 0.22) 80%,
-    rgba(0, 229, 255, 0) 100%
-  );
-  filter: blur(2px);
-  animation: beam-pulse 4s ease-in-out infinite;
-  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
-  z-index: 0;
-}
-
-@keyframes beam-pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
 .hero-figure__grid {
   position: absolute;
   inset: 0;
@@ -52,6 +26,8 @@
   object-fit: contain;
   object-position: center bottom;
   filter: drop-shadow(0 0 24px rgba(0, 229, 255, 0.4));
+  transform-origin: center bottom;
+  transition: transform 0.15s linear;
 }
 
 .hero-figure__nodes {
@@ -64,8 +40,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-figure__beam {
-    animation: none;
-    opacity: 0.85;
+  .hero-figure__img {
+    transition: none;
   }
 }

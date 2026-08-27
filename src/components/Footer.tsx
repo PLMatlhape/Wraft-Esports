@@ -3,7 +3,7 @@ import './Footer.css'
 const FOOTER_COLUMNS = [
   {
     heading: 'Platform',
-    links: ['All Games', 'Multiplayer', 'Tournaments', 'Leaderboards'],
+    links: ['Games', 'Feeds', 'Teams', 'Tournaments'],
   },
   {
     heading: 'Company',
@@ -20,8 +20,11 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__grid">
         <div className="footer__brand">
-          <span className="footer__logo">WRAFT</span>
-          <p className="footer__tagline">Enter the grid. Own the arena.</p>
+          <span className="footer__logo">
+            Wraft<span className="footer__logo-e">E</span>
+            <span className="footer__logo-sports">sports</span>
+          </span>
+          <p className="footer__tagline">Game on. Own the arena.</p>
         </div>
 
         {FOOTER_COLUMNS.map((col) => (

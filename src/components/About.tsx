@@ -1,3 +1,4 @@
+import Reveal from './Reveal'
 import './About.css'
 
 const STATS = [
@@ -10,7 +11,7 @@ export default function About() {
   return (
     <section id="about" className="about">
       <div className="container about__grid">
-        <div className="about__text">
+        <Reveal className="about__text">
           <p className="section-eyebrow">About Wraft</p>
           <h2 className="about__heading">
             Built by players, <span>run on skill.</span>
@@ -21,14 +22,14 @@ export default function About() {
             dead lobbies — just a fast matchmaking network tuned for players
             who show up to compete.
           </p>
-        </div>
+        </Reveal>
 
         <div className="about__stats">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="about__stat">
+          {STATS.map((stat, i) => (
+            <Reveal key={stat.label} delay={i * 100} className="about__stat">
               <span className="about__stat-value">{stat.value}</span>
               <span className="about__stat-label">{stat.label}</span>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

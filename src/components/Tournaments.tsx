@@ -1,9 +1,10 @@
+import Reveal from './Reveal'
 import './Tournaments.css'
 
 export default function Tournaments() {
   return (
     <section id="tournaments" className="tournaments">
-      <div className="container tournaments__inner">
+      <Reveal as="div" className="container tournaments__inner">
         <div>
           <p className="section-eyebrow">Live Tournaments</p>
           <h2 className="tournaments__heading">
@@ -18,7 +19,7 @@ export default function Tournaments() {
         <a href="#" className="tournaments__cta">
           View Schedule
         </a>
-      </div>
+      </Reveal>
     </section>
   )
 }
