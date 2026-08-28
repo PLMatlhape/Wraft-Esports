@@ -22,6 +22,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const isGamesPage = location.pathname === '/games'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -39,7 +40,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <header className={`navbar ${isGamesPage ? 'navbar--games' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
       <div className="container navbar__inner">
         <Link to="/" className="navbar__logo" aria-label="WraftEsports home">
           <img src={logo} alt="" className="navbar__logo-img" />
