@@ -1,6 +1,15 @@
 .multiplayer {
   padding: var(--space-section) 0;
   border-top: 1px solid var(--color-border);
+
+  /* Section 3 of 4: continues from About's ending tone (--section-bg-2)
+     and deepens into --section-bg-3, the most saturated blue-tinted stop,
+     ready to hand off to Tournaments. */
+  background: linear-gradient(
+    180deg,
+    var(--section-bg-2) 0%,
+    var(--section-bg-3) 100%
+  );
 }
 
 .multiplayer__grid {

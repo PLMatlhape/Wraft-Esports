@@ -15,7 +15,11 @@ const FRAMES: string[] = Array.from({ length: 7 }, (_, index) => {
   return frameModules[path]
 }).filter((url): url is string => Boolean(url))
 
-const FRAME_DURATION_MS = 250
+// Frame 0 is the "resting" pose and holds noticeably longer than the rest
+// of the sequence, giving the eye a beat to land on the hero before it
+// starts moving. Frames 1-6 then play at the original playback speed.
+const FIRST_FRAME_HOLD_MS = 1500
+const FRAME_DURATION_MS = 230
 
 export default function HeroFigure() {
   const frames = framesOrFallback()
@@ -37,13 +41,31 @@ export default function HeroFigure() {
       return image
     })
 
-    const id = window.setInterval(() => {
-      frameIndexRef.current = (frameIndexRef.current + 1) % frames.length
-      setFrameIndex(frameIndexRef.current)
-    }, FRAME_DURATION_MS)
+    let timeoutId: number
+
+    // Plays F0 → F(last) exactly once, then stops (holds on the last frame).
+    // F0 uses its own longer hold; every frame after that uses
+    // FRAME_DURATION_MS. Using a chained setTimeout (rather than
+    // setInterval) lets frame 0's duration differ from the rest and lets
+    // the chain simply not reschedule once it reaches the final frame.
+    function scheduleNextFrame(currentIndex: number) {
+      const isLastFrame = currentIndex >= frames.length - 1
+      if (isLastFrame) return
+
+      const holdTime = currentIndex === 0 ? FIRST_FRAME_HOLD_MS : FRAME_DURATION_MS
+
+      timeoutId = window.setTimeout(() => {
+        const nextIndex = currentIndex + 1
+        frameIndexRef.current = nextIndex
+        setFrameIndex(nextIndex)
+        scheduleNextFrame(nextIndex)
+      }, holdTime)
+    }
+
+    scheduleNextFrame(frameIndexRef.current)
 
     return () => {
-      window.clearInterval(id)
+      window.clearTimeout(timeoutId)
       preloaded.forEach((image) => {
         image.onload = null
         image.onerror = null

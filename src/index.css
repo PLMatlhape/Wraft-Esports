@@ -3,8 +3,28 @@
    Palette swaps the reference's red circuitry for an electric
    cyan-blue system: cooler, more "signal/network" than "combat".
 =========================================================== */
-/* Zina-Regular: served from /public (see public/Font/.../fonts/README.txt) so a
-   missing binary never breaks the build — it just falls back to Anton below. */
+
+/* -----------------------------------------------------------
+   Zina-Regular headline font
+   -----------------------------------------------------------
+   ⚠️ KNOWN ISSUE: the three files below
+   (public/Font/Zina_Complete/Fonts/WEB/fonts/Zina-Regular.woff2 / .woff / .ttf)
+   are still PLACEHOLDER text files, not real font binaries — that's why the
+   hero headline currently renders in the fallback (Anton) instead of Zina.
+   The @font-face declaration itself, the file paths, and the font-family
+   name are all correct and don't need to change.
+
+   To fix: download the real Zina-Regular webfont files from
+   https://www.fontshare.com/fonts/zina (free, ITF Free Font License — see
+   public/Font/Zina_Complete/License/FFL.txt) and overwrite the three
+   placeholder files at:
+     public/Font/Zina_Complete/Fonts/WEB/fonts/Zina-Regular.woff2
+     public/Font/Zina_Complete/Fonts/WEB/fonts/Zina-Regular.woff
+     public/Font/Zina_Complete/Fonts/WEB/fonts/Zina-Regular.ttf
+   No code changes are needed after that — the browser will pick up the
+   real font automatically on next load. This environment can't reach
+   fontshare.com to fetch it for you (outside the allowed network list).
+------------------------------------------------------------- */
 @font-face {
   font-family: 'Zina-Regular';
   src: url('/Font/Zina_Complete/Fonts/WEB/fonts/Zina-Regular.woff2') format('woff2'),
@@ -25,6 +45,20 @@
   --color-text-primary: #eaf6fb;
   --color-text-muted: #7c93a8;
   --color-border: rgba(0, 229, 255, 0.16);
+
+  /* ---------------------------------------------------------
+     Section background stops — a rotating sequence through the
+     existing palette so each section on a page reads as a
+     distinct "zone" while staying inside the same cyan/blue
+     system. Each section's gradient starts on the stop where the
+     previous section left off, so the seam between two sections
+     blends rather than hard-cuts. See About.css / Multiplayer.css
+     / Tournaments.css / PageHeader.css for usage.
+  --------------------------------------------------------- */
+  --section-bg-0: var(--color-bg);
+  --section-bg-1: var(--color-bg-raised);
+  --section-bg-2: color-mix(in srgb, var(--color-blue-deep) 24%, var(--color-bg-raised) 76%);
+  --section-bg-3: color-mix(in srgb, var(--color-blue-deep) 42%, var(--color-bg) 58%);
 
   --font-display: 'Rajdhani', 'Arial Narrow', sans-serif;
   --font-headline: 'Zina-Regular', 'Anton', 'Arial Narrow', sans-serif;

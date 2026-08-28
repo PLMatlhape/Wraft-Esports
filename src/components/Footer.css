@@ -1,6 +1,7 @@
 .footer {
   border-top: 1px solid var(--color-border);
   padding-top: 64px;
+  background: var(--section-bg-0);
 }
 
 .footer__grid {

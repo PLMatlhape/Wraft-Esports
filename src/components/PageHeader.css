@@ -3,7 +3,7 @@
   border-bottom: 1px solid var(--color-border);
   background:
     radial-gradient(ellipse at 15% 0%, rgba(0, 229, 255, 0.08), transparent 55%),
-    var(--color-bg);
+    linear-gradient(180deg, var(--section-bg-0) 0%, var(--section-bg-1) 100%);
 }
 
 .page-header__heading {

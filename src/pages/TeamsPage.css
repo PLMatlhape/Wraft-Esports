@@ -1,5 +1,9 @@
 .teams {
   padding: var(--space-section) 0;
+
+  /* Continues from PageHeader's ending tone (--section-bg-1) into
+     --section-bg-2, mirroring the home page's rotation. */
+  background: linear-gradient(180deg, var(--section-bg-1) 0%, var(--section-bg-2) 100%);
 }
 
 .teams__tabs {

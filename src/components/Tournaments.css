@@ -1,9 +1,14 @@
 .tournaments {
   padding: var(--space-section) 0;
   border-top: 1px solid var(--color-border);
+
+  /* Section 4 of 4: picks up Multiplayer's deep-blue stop (--section-bg-3)
+     and eases back down to the base black (--section-bg-0), closing the
+     loop before the footer. The cyan radial highlight rides on top as a
+     second background layer. */
   background:
     radial-gradient(ellipse at 20% 50%, rgba(0, 229, 255, 0.08), transparent 60%),
-    var(--color-bg-raised);
+    linear-gradient(180deg, var(--section-bg-3) 0%, var(--section-bg-0) 100%);
 }
 
 .tournaments__inner {

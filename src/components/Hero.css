@@ -6,6 +6,16 @@
   padding-top: 120px;
   padding-bottom: 60px;
   overflow: hidden;
+
+  /* Section 1 of 4 in the home-page palette rotation: solid base black,
+     easing toward --section-bg-1 at the very bottom so it hands off
+     smoothly into About underneath it. */
+  background: linear-gradient(
+    180deg,
+    var(--section-bg-0) 0%,
+    var(--section-bg-0) 82%,
+    var(--section-bg-1) 100%
+  );
 }
 
 /* ---- Full-bleed signal beam ----
@@ -121,8 +131,35 @@
   margin-top: 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 32px;
   flex-wrap: wrap;
+}
+
+/* ---- CTA entrance: Play Now glides in from the left screen edge,
+   the social cluster glides in from the right screen edge, both
+   settling into place at the same time the copy fades up. Distances
+   are in vw so the "off-screen" feel holds at any viewport width. ---- */
+@keyframes cta-in-from-left {
+  from {
+    transform: translateX(-60vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cta-in-from-right {
+  from {
+    transform: translateX(60vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .hero__cta {
@@ -138,6 +175,8 @@
   border-radius: 4px;
   box-shadow: 0 0 26px rgba(0, 229, 255, 0.4);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  animation: cta-in-from-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.35s;
 }
 
 .hero__cta:hover {
@@ -148,6 +187,8 @@
 .hero__socials {
   display: flex;
   gap: 14px;
+  animation: cta-in-from-right 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.45s;
 }
 
 .hero__social-icon {
