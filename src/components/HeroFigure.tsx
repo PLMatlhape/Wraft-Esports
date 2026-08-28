@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import fallbackImg from '../images/wraft_home.png'
 import './HeroFigure.css'
 
-// The hero animation is a 7-frame sequence: F0 → F6 → F0.
-// Keep the list explicit so a missing/renamed asset cannot silently change
-// the animation sequence or make the component fall back unexpectedly.
+// The hero animation is a 7-frame sequence. It plays once per HeroFigure
+// mount: F0 → F1 → F2 → F3 → F4 → F5 → F6, then stays on F6.
 const frameModules = import.meta.glob('../images/Home/Wraft_F*.png', {
   eager: true,
   import: 'default',
@@ -19,9 +18,8 @@ const FIRST_FRAME_HOLD_MS = 1000
 const FRAME_DURATION_MS = 250
 
 export default function HeroFigure() {
-  const frames = framesOrFallback()
+  const frames = FRAMES.length > 0 ? FRAMES : [fallbackImg]
   const [frameIndex, setFrameIndex] = useState(0)
-  const frameIndexRef = useRef(0)
   const prefersReducedMotion = useMemo(
     () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     [],
@@ -30,7 +28,6 @@ export default function HeroFigure() {
   useEffect(() => {
     if (prefersReducedMotion || frames.length <= 1) return
 
-    // Preload every frame so the loop never waits on an image request mid-sequence.
     const preloaded = frames.map((src) => {
       const image = new Image()
       image.src = src
@@ -39,22 +36,21 @@ export default function HeroFigure() {
 
     let timeoutId: number | undefined
     let cancelled = false
+    let currentIndex = 0
 
-    // Continuously plays F0 → F6 → F0. Frame 0 gets a longer hold each cycle.
-    function scheduleNextFrame(currentIndex: number) {
-      if (cancelled) return
+    const scheduleNextFrame = () => {
+      if (cancelled || currentIndex >= frames.length - 1) return
+
       const holdTime = currentIndex === 0 ? FIRST_FRAME_HOLD_MS : FRAME_DURATION_MS
-
       timeoutId = window.setTimeout(() => {
         if (cancelled) return
-        const nextIndex = (currentIndex + 1) % frames.length
-        frameIndexRef.current = nextIndex
-        setFrameIndex(nextIndex)
-        scheduleNextFrame(nextIndex)
+        currentIndex += 1
+        setFrameIndex(currentIndex)
+        scheduleNextFrame()
       }, holdTime)
     }
 
-    scheduleNextFrame(frameIndexRef.current)
+    scheduleNextFrame()
 
     return () => {
       cancelled = true
@@ -79,10 +75,6 @@ export default function HeroFigure() {
       </svg>
     </div>
   )
-}
-
-function framesOrFallback(): string[] {
-  return FRAMES.length > 0 ? FRAMES : [fallbackImg]
 }
 
 const NODES = [
