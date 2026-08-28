@@ -11,13 +11,10 @@ const FEATURES: FeatureItem[] = [
 export default function FeatureRail() {
   return (
     <ul className="feature-rail">
-      {FEATURES.map((feature, i) => (
-        <li key={feature.title} className="feature-rail__item" style={{ transitionDelay: `${i * 90}ms` }}>
+      {FEATURES.map((feature) => (
+        <li key={feature.title} className="feature-rail__item">
           <span className="feature-rail__bar" />
-          <div>
-            <h3 className="feature-rail__title">{feature.title}</h3>
-            <p className="feature-rail__desc">{feature.description}</p>
-          </div>
+          <div><h3 className="feature-rail__title">{feature.title}</h3><p className="feature-rail__desc">{feature.description}</p></div>
         </li>
       ))}
     </ul>
