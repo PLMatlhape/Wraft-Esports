@@ -6,15 +6,15 @@ import './About.css'
 export default function About() {
   return (
     <section id="about" className="about">
-      {/* Decorative background art: GAME PAGE DESIGN.png sits behind the
-          copy as a faded, soft-edged graphic (not a boxed foreground
-          image), with the Wraft logo centered directly on top of it. */}
       <div className="about__bg" aria-hidden="true">
+        {/* GAME PAGE DESIGN remains a standalone, centered background print. */}
         <div className="about__bg-art">
           <img src={gamePageDesign} alt="" className="about__bg-image" />
-          <div className="about__logo-mark">
-            <img src={wraftLogo} alt="" className="about__logo" />
-          </div>
+        </div>
+
+        {/* Logo is deliberately independent from the artwork and sits to its side. */}
+        <div className="about__logo-mark">
+          <img src={wraftLogo} alt="" className="about__logo" />
         </div>
       </div>
 
@@ -44,25 +44,10 @@ export default function About() {
 
           <h3 className="about__subheading">What We Do</h3>
           <ul className="about__list">
-            <li>
-              <strong>Skill Development:</strong> We host local tournaments,
-              training camps, and bootcamps to sharpen our players' mechanical
-              skills and strategic thinking.
-            </li>
-            <li>
-              <strong>Mentorship &amp; Discipline:</strong> Esports requires
-              focus, teamwork, and mental resilience. We guide our youth both
-              in and out of the game.
-            </li>
-            <li>
-              <strong>Professional Pathways:</strong> We connect our players
-              with competitive leagues, sponsorships, and networking
-              opportunities to launch real esports careers.
-            </li>
-            <li>
-              <strong>Community Building:</strong> We are growing a safe,
-              inclusive, and vibrant gaming culture right here at home.
-            </li>
+            <li><strong>Skill Development:</strong> We host local tournaments, training camps, and bootcamps to sharpen our players' mechanical skills and strategic thinking.</li>
+            <li><strong>Mentorship &amp; Discipline:</strong> Esports requires focus, teamwork, and mental resilience. We guide our youth both in and out of the game.</li>
+            <li><strong>Professional Pathways:</strong> We connect our players with competitive leagues, sponsorships, and networking opportunities to launch real esports careers.</li>
+            <li><strong>Community Building:</strong> We are growing a safe, inclusive, and vibrant gaming culture right here at home.</li>
           </ul>
 
           <h3 className="about__subheading">The Future of Township Gaming</h3>
