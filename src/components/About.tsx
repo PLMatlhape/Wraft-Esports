@@ -29,14 +29,18 @@ export default function About() {
                 <li><strong>Community Building:</strong> We are growing a safe, inclusive, and vibrant gaming culture right here at home.</li>
               </ul>
             </div>
+          </div>
+          <div className="about__future-row">
+            <div className="about__future-copy">
+              <h3 className="about__subheading">The Future of Township Gaming</h3>
+              <p className="about__body">The talent in ekasi is undeniable, but the opportunities have been limited. We are changing that story. By investing in our youth today, we are building the champions, content creators, and esports leaders of tomorrow.</p>
+            </div>
             <Reveal className="about__jersey" delay={180}>
               <div className="about__jersey-glow" />
               <img src={mphozaJersey} alt="Wraft esports jersey for Coach Mphoza" />
               <span>COACH MPHOZA</span>
             </Reveal>
           </div>
-          <h3 className="about__subheading">The Future of Township Gaming</h3>
-          <p className="about__body">The talent in ekasi is undeniable, but the opportunities have been limited. We are changing that story. By investing in our youth today, we are building the champions, content creators, and esports leaders of tomorrow.</p>
         </Reveal>
       </div>
     </section>
