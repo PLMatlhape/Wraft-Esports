@@ -1,83 +1,18 @@
-.section-eyebrow {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-cyan);
-  margin-bottom: 14px;
-}
-
-.about {
-  padding: var(--space-section) 0;
-  border-top: 1px solid var(--color-border);
-
-  /* Section 2 of 4: picks up where Hero handed off (--section-bg-1) and
-     eases toward --section-bg-2 by the bottom, ready for Multiplayer. */
-  background: linear-gradient(
-    180deg,
-    var(--section-bg-1) 0%,
-    var(--section-bg-1) 20%,
-    var(--section-bg-2) 100%
-  );
-}
-
-.about__grid {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-
-.about__heading {
-  font-size: clamp(32px, 4vw, 46px);
-  line-height: 1.15;
-  font-weight: 700;
-  color: var(--color-text-primary);
-}
-
-.about__heading span {
-  color: var(--color-cyan);
-}
-
-.about__body {
-  margin-top: 24px;
-  max-width: 520px;
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--color-text-muted);
-}
-
-.about__stats {
-  display: grid;
-  gap: 28px;
-}
-
-.about__stat {
-  padding: 24px 28px;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: linear-gradient(180deg, rgba(0, 229, 255, 0.05), transparent);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.about__stat-value {
-  font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: 700;
-  color: var(--color-cyan);
-}
-
-.about__stat-label {
-  font-size: 13px;
-  color: var(--color-text-muted);
-}
-
-@media (max-width: 900px) {
-  .about__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
+.about { position: relative; padding: clamp(90px,10vw,150px) 0; overflow: hidden; background: radial-gradient(circle at 12% 18%, rgba(0,229,255,.13), transparent 32%), radial-gradient(circle at 85% 75%, rgba(50,150,255,.09), transparent 34%), linear-gradient(135deg, #f7fbfc 0%, #eef8fa 48%, #f8fbfc 100%); color: #09202a; }
+.about::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 20%, rgba(0,229,255,.06) 50%, transparent 80%); }
+.about__inner { position: relative; z-index: 1; display: grid; grid-template-columns: .85fr 1.4fr; gap: clamp(50px,8vw,110px); align-items: start; }
+.about__brand { position: sticky; top: 120px; }
+.about__logo { width: clamp(90px,10vw,130px); height: auto; margin-bottom: 34px; }
+.section-eyebrow { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #009eaa; margin-bottom: 14px; }
+.about__heading { font-family: var(--font-headline); font-size: clamp(42px,5vw,72px); line-height: .98; font-weight: 400; letter-spacing: -.02em; color: #09202a; max-width: 560px; }
+.about__heading span { color: #00aebb; }
+.about__lead { font-size: clamp(20px,2.1vw,28px); line-height: 1.45; font-weight: 500; color: #173a45; max-width: 800px; }
+.about__body { margin-top: 24px; font-size: 17px; line-height: 1.8; color: #46616b; max-width: 760px; }
+.about__sections { margin-top: 70px; display: grid; gap: 58px; }
+.about__block > p:not(.section-eyebrow), .about__future > p:not(.section-eyebrow) { max-width: 760px; font-size: 16px; line-height: 1.8; color: #46616b; }
+.about__list { display: grid; grid-template-columns: repeat(2,1fr); gap: 34px 44px; }
+.about__list strong { display: block; font-family: var(--font-display); font-size: 19px; letter-spacing: .04em; color: #092b37; }
+.about__list p { margin-top: 8px; font-size: 14px; line-height: 1.7; color: #526d76; }
+.about__future { padding-top: 8px; }
+.about__future p + p { margin-top: 16px; }
+@media (max-width: 900px) { .about__inner { grid-template-columns: 1fr; gap: 40px; } .about__brand { position: static; } .about__list { grid-template-columns: 1fr; } }
