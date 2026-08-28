@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import HeroFigure from './HeroFigure'
 import FeatureRail from './FeatureRail'
-import gamePageDesign from '../images/GAME PAGE DESIGN.png'
+import playIcon from '../images/play.png'
 import './Hero.css'
 
 export default function Hero() {
@@ -18,7 +18,9 @@ export default function Hero() {
           </h1>
           <div className="hero__rule" />
           <div className="hero__actions">
-            <Link to="/games" className="hero__cta" style={{ backgroundImage: `url("${gamePageDesign}")` }}>Play Now</Link>
+            <Link to="/games" className="hero__cta" aria-label="Play Now">
+              <img src={playIcon} alt="" className="hero__play-icon" />
+            </Link>
             <div className="hero__socials" aria-label="Wraft on social media">
               <a href="#" aria-label="Facebook" className="hero__social-icon"><FacebookIcon /></a>
               <a href="#" aria-label="Instagram" className="hero__social-icon"><InstagramIcon /></a>
