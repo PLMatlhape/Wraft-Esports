@@ -15,6 +15,33 @@
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Games is a light page, so its navbar theme is route-driven rather than scroll-driven. */
+.navbar--games,
+.navbar--games.navbar--scrolled {
+  background-color: rgba(231, 243, 252, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(16, 50, 64, 0.08);
+}
+
+.navbar--games.navbar--scrolled {
+  padding: 14px 0;
+}
+
+.navbar--games .navbar__logo-text,
+.navbar--games .navbar__link,
+.navbar--games .navbar__icon-btn,
+.navbar--games .navbar__menu-toggle span {
+  color: #10202a;
+}
+
+.navbar--games .navbar__logo-sports {
+  color: #53656e;
+}
+
+.navbar--games .navbar__link--btn {
+  color: #10202a;
+}
+
 .navbar__inner {
   display: flex;
   align-items: center;
@@ -164,6 +191,11 @@
     padding: 16px 20px 24px;
   }
 
+  .navbar--games .navbar__mobile {
+    background: rgba(231, 243, 252, 0.98);
+    border-top-color: rgba(16, 50, 64, 0.08);
+  }
+
   .navbar__mobile-link {
     padding: 14px 0;
     font-size: 15px;
@@ -176,5 +208,10 @@
     color: var(--color-text-primary);
     width: 100%;
     font-family: var(--font-body);
+  }
+
+  .navbar--games .navbar__mobile-link {
+    color: #10202a;
+    border-bottom-color: rgba(16, 50, 64, 0.08);
   }
 }
