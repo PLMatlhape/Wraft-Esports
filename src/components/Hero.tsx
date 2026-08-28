@@ -11,20 +11,22 @@ export default function Hero() {
       <div className="hero__beam-wrap" aria-hidden="true"><div className="hero__beam" /></div>
       <div className="container hero__grid">
         <Reveal className="hero__copy" direction="left">
-          <p className="hero__eyebrow">The signal is live — are you ready to deploy?</p>
-          <h1 className="hero__headline" aria-label="Game On">
-            <span className="hero__headline-line" aria-hidden="true">GAME</span>
-            <span className="hero__headline-line" aria-hidden="true"><span className="hero__headline-ghost">GAM</span><span className="hero__headline-accent">ON</span></span>
-          </h1>
-          <div className="hero__rule" />
-          <div className="hero__actions">
-            <Link to="/games" className="hero__cta" aria-label="Play Now">
-              <img src={playIcon} alt="" className="hero__play-icon" />
-            </Link>
-            <div className="hero__socials" aria-label="Wraft on social media">
-              <a href="#" aria-label="Facebook" className="hero__social-icon"><FacebookIcon /></a>
-              <a href="#" aria-label="Instagram" className="hero__social-icon"><InstagramIcon /></a>
-              <a href="#" aria-label="X (Twitter)" className="hero__social-icon"><XIcon /></a>
+          <div className="hero__copy-entrance">
+            <p className="hero__eyebrow">The signal is live — are you ready to deploy?</p>
+            <h1 className="hero__headline" aria-label="Game On">
+              <span className="hero__headline-line" aria-hidden="true">GAME</span>
+              <span className="hero__headline-line" aria-hidden="true"><span className="hero__headline-ghost">GAM</span><span className="hero__headline-accent">ON</span></span>
+            </h1>
+            <div className="hero__rule" />
+            <div className="hero__actions">
+              <Link to="/games" className="hero__cta" aria-label="Play Now">
+                <img src={playIcon} alt="" className="hero__play-icon" />
+              </Link>
+              <div className="hero__socials" aria-label="Wraft on social media">
+                <a href="#" aria-label="Facebook" className="hero__social-icon"><FacebookIcon /></a>
+                <a href="#" aria-label="Instagram" className="hero__social-icon"><InstagramIcon /></a>
+                <a href="#" aria-label="X (Twitter)" className="hero__social-icon"><XIcon /></a>
+              </div>
             </div>
           </div>
         </Reveal>
