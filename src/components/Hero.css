@@ -6,23 +6,9 @@
   padding-top: 120px;
   padding-bottom: 60px;
   overflow: hidden;
-
-  /* Section 1 of 4 in the home-page palette rotation: solid base black,
-     easing toward --section-bg-1 at the very bottom so it hands off
-     smoothly into About underneath it. */
-  background: linear-gradient(
-    180deg,
-    var(--section-bg-0) 0%,
-    var(--section-bg-0) 82%,
-    var(--section-bg-1) 100%
-  );
+  background: linear-gradient(180deg, var(--section-bg-0) 0%, var(--section-bg-0) 82%, var(--section-bg-1) 100%);
 }
 
-/* ---- Full-bleed signal beam ----
-   Spans the entire hero section (from the page's true top, behind the
-   fixed navbar, down to the bottom of this section) and uses the same
-   3-column template as .hero__grid so it lands exactly under the image
-   column at every breakpoint. */
 .hero__beam-wrap {
   position: absolute;
   inset: 0;
@@ -41,23 +27,13 @@
   justify-self: center;
   width: 48%;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 229, 255, 0) 0%,
-    rgba(0, 229, 255, 0.22) 14%,
-    rgba(0, 229, 255, 0.36) 45%,
-    rgba(0, 229, 255, 0.2) 78%,
-    rgba(0, 229, 255, 0) 100%
-  );
+  background: linear-gradient(180deg, rgba(0, 229, 255, 0), rgba(0, 229, 255, 0.22) 14%, rgba(0, 229, 255, 0.36) 45%, rgba(0, 229, 255, 0.2) 78%, rgba(0, 229, 255, 0));
   clip-path: polygon(28% 0%, 72% 0%, 100% 100%, 0% 100%);
   filter: blur(2px);
   animation: beam-pulse 4s ease-in-out infinite;
 }
 
-@keyframes beam-pulse {
-  0%, 100% { opacity: 0.75; }
-  50% { opacity: 1; }
-}
+@keyframes beam-pulse { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
 
 .hero__grid {
   position: relative;
@@ -69,28 +45,8 @@
   width: 100%;
 }
 
-.hero__copy {
-  animation: hero-copy-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes hero-copy-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero__eyebrow {
-  font-size: 14px;
-  color: var(--color-text-muted);
-  max-width: 280px;
-  margin-bottom: 18px;
-}
-
+.hero__copy { position: relative; }
+.hero__eyebrow { font-size: 14px; color: var(--color-text-muted); max-width: 280px; margin-bottom: 18px; }
 .hero__headline {
   font-family: var(--font-headline);
   font-size: clamp(64px, 9.5vw, 118px);
@@ -102,65 +58,11 @@
   flex-direction: column;
   text-transform: uppercase;
 }
-
-.hero__headline-line {
-  display: block;
-  white-space: nowrap;
-}
-
-/* Invisible "GAM" the exact width of the real word — pushes the
-   following "ON" so it starts precisely under the "E" above it. */
-.hero__headline-ghost {
-  color: transparent;
-  user-select: none;
-}
-
-.hero__headline-accent {
-  color: var(--color-cyan);
-  text-shadow: 0 0 30px rgba(0, 229, 255, 0.6), 0 0 60px rgba(0, 229, 255, 0.25);
-}
-
-.hero__rule {
-  margin-top: 28px;
-  width: 160px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-cyan) 0%, transparent 100%);
-}
-
-.hero__actions {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-}
-
-/* ---- CTA entrance: Play Now glides in from the left screen edge,
-   the social cluster glides in from the right screen edge, both
-   settling into place at the same time the copy fades up. Distances
-   are in vw so the "off-screen" feel holds at any viewport width. ---- */
-@keyframes cta-in-from-left {
-  from {
-    transform: translateX(-60vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes cta-in-from-right {
-  from {
-    transform: translateX(60vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
+.hero__headline-line { display: block; white-space: nowrap; }
+.hero__headline-ghost { color: transparent; user-select: none; }
+.hero__headline-accent { color: var(--color-cyan); text-shadow: 0 0 30px rgba(0, 229, 255, 0.6), 0 0 60px rgba(0, 229, 255, 0.25); }
+.hero__rule { margin-top: 28px; width: 160px; height: 2px; background: linear-gradient(90deg, var(--color-cyan) 0%, transparent 100%); }
+.hero__actions { margin-top: 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
 
 .hero__cta {
   display: inline-flex;
@@ -175,105 +77,26 @@
   border-radius: 4px;
   box-shadow: 0 0 26px rgba(0, 229, 255, 0.4);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-  animation: cta-in-from-left 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.35s;
 }
-
-.hero__cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 34px rgba(0, 229, 255, 0.6);
-}
-
-.hero__socials {
-  display: flex;
-  gap: 14px;
-  animation: cta-in-from-right 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.45s;
-}
-
-.hero__social-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-primary);
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-.hero__social-icon:hover {
-  color: var(--color-cyan);
-  border-color: var(--color-cyan);
-  transform: translateY(-2px);
-}
-
-.hero__figure-wrap {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.hero__features {
-  position: relative;
-  z-index: 1;
-  align-self: center;
-}
+.hero__cta:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(0, 229, 255, 0.6); }
+.hero__socials { display: flex; gap: 14px; }
+.hero__social-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-primary); transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.hero__social-icon:hover { color: var(--color-cyan); border-color: var(--color-cyan); transform: translateY(-2px); }
+.hero__figure-wrap { position: relative; z-index: 1; display: flex; justify-content: center; }
+.hero__features { position: relative; z-index: 1; align-self: center; }
 
 @media (max-width: 1100px) {
-  .hero__grid,
-  .hero__beam-wrap {
-    grid-template-columns: 1fr;
-  }
-
-  .hero__beam {
-    grid-column: 1;
-  }
-
-  .hero__features {
-    order: 3;
-  }
-
-  .hero__figure-wrap {
-    order: 2;
-    max-width: 340px;
-    margin: 0 auto;
-  }
-
-  .hero__copy {
-    order: 1;
-    text-align: center;
-  }
-
-  .hero__headline {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .hero__eyebrow {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero__rule {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero__actions {
-    justify-content: center;
-  }
+  .hero__grid, .hero__beam-wrap { grid-template-columns: 1fr; }
+  .hero__beam { grid-column: 1; }
+  .hero__features { order: 3; }
+  .hero__figure-wrap { order: 2; max-width: 340px; margin: 0 auto; }
+  .hero__copy { order: 1; text-align: center; }
+  .hero__headline { align-items: flex-start; text-align: left; }
+  .hero__eyebrow { margin-left: auto; margin-right: auto; }
+  .hero__rule { margin-left: auto; margin-right: auto; }
+  .hero__actions { justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__beam {
-    animation: none;
-    opacity: 0.85;
-  }
-
-  .hero__copy {
-    animation: none;
-  }
+  .hero__beam { animation: none; opacity: 0.85; }
 }
