@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import HeroFigure from './HeroFigure'
 import FeatureRail from './FeatureRail'
+import gamePageDesign from '../images/GAME PAGE DESIGN.png'
 import './Hero.css'
 
 export default function Hero() {
@@ -9,7 +10,7 @@ export default function Hero() {
     <section id="home" className="hero">
       <div className="hero__beam-wrap" aria-hidden="true"><div className="hero__beam" /></div>
       <div className="container hero__grid">
-        <Reveal className="hero__copy">
+        <Reveal className="hero__copy" direction="left">
           <p className="hero__eyebrow">The signal is live — are you ready to deploy?</p>
           <h1 className="hero__headline" aria-label="Game On">
             <span className="hero__headline-line" aria-hidden="true">GAME</span>
@@ -17,7 +18,7 @@ export default function Hero() {
           </h1>
           <div className="hero__rule" />
           <div className="hero__actions">
-            <Link to="/games" className="hero__cta">Play Now</Link>
+            <Link to="/games" className="hero__cta" style={{ backgroundImage: `url("${gamePageDesign}")` }}>Play Now</Link>
             <div className="hero__socials" aria-label="Wraft on social media">
               <a href="#" aria-label="Facebook" className="hero__social-icon"><FacebookIcon /></a>
               <a href="#" aria-label="Instagram" className="hero__social-icon"><InstagramIcon /></a>
@@ -26,7 +27,7 @@ export default function Hero() {
           </div>
         </Reveal>
         <div className="hero__figure-wrap"><HeroFigure /></div>
-        <Reveal className="hero__features"><FeatureRail /></Reveal>
+        <Reveal className="hero__features" direction="right"><FeatureRail /></Reveal>
       </div>
     </section>
   )
