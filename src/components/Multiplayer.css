@@ -1,1 +1,94 @@
-.multiplayer{position:relative;padding:var(--space-section) 0;overflow:hidden;background:linear-gradient(180deg,#dff2f5 0%,#cceff3 18%,#07506a 78%,#06354e 100%);color:#eafcff}.multiplayer::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,80,105,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(0,80,105,.075) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,transparent,black 18%,black 80%,transparent)}.multiplayer::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 72% 35%,rgba(0,229,255,.22),transparent 40%),radial-gradient(ellipse at 15% 85%,rgba(3,40,60,.3),transparent 45%)}.multiplayer__grid{position:relative;z-index:1;display:grid;grid-template-columns:.9fr 1.4fr;gap:56px;align-items:start}.multiplayer .section-eyebrow,.multiplayer__heading,.multiplayer__body{color:#063547}.multiplayer .section-eyebrow{color:#007f8e}.multiplayer__heading{font-size:clamp(30px,4vw,42px);font-weight:700;line-height:1.15;max-width:360px}.multiplayer__heading span{color:#008f9e}.multiplayer__body{margin-top:20px;color:rgba(6,53,71,.72);line-height:1.7;max-width:380px}.multiplayer__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.multiplayer__card{border:1px solid rgba(0,110,135,.2);border-radius:10px;padding:26px 22px;background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.22));backdrop-filter:blur(8px);transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s ease,background .3s ease}.multiplayer__card:hover{transform:translateY(-5px);border-color:rgba(0,140,160,.5);background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.3))}.multiplayer__card h3{font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:.03em;color:#063547}.multiplayer__card p{margin-top:10px;font-size:13.5px;line-height:1.6;color:rgba(6,53,71,.68)}@media(max-width:900px){.multiplayer__grid{grid-template-columns:1fr;gap:32px}.multiplayer__cards{grid-template-columns:1fr}}
+.multiplayer {
+  padding: var(--space-section) 0;
+  position: relative;
+
+  /* Section 3: picks up About's light cyan hand-off (#cdeef6) and pushes
+     it into a vivid cyan-blue body, deepening toward --section-bg-3 at
+     the bottom so Tournaments/Footer continue the blend uninterrupted.
+     The thin gradient line up top replaces the old flat 1px border --
+     a soft glow instead of a hard rule. */
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(0, 229, 255, 0.55) 50%, transparent 100%) top / 100% 1px no-repeat,
+    radial-gradient(ellipse at 22% 12%, rgba(92, 244, 255, 0.28), transparent 55%),
+    radial-gradient(ellipse at 82% 85%, rgba(0, 229, 255, 0.12), transparent 60%),
+    linear-gradient(
+      180deg,
+      #cdeef6 0%,
+      #4fd3ea 10%,
+      #00b7d6 30%,
+      var(--color-blue-mid) 56%,
+      var(--color-blue-deep) 80%,
+      var(--section-bg-3) 100%
+    );
+}
+
+.multiplayer__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.4fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.multiplayer__heading {
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  max-width: 360px;
+}
+
+.multiplayer__heading span {
+  color: var(--color-cyan);
+}
+
+.multiplayer__body {
+  margin-top: 20px;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.multiplayer__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.multiplayer__card {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 10px;
+  padding: 26px 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(2px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.multiplayer__card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-cyan);
+}
+
+.multiplayer__card h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.multiplayer__card p {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+@media (max-width: 900px) {
+  .multiplayer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .multiplayer__cards {
+    grid-template-columns: 1fr;
+  }
+}

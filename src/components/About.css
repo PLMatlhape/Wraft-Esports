@@ -1,1 +1,196 @@
-.about{position:relative;padding:clamp(100px,11vw,160px) 0;overflow:hidden;color:#09202a;background:linear-gradient(180deg,#f7fbfc 0%,#eef8fa 38%,#e8f6f8 70%,#dff2f5 100%)}.about::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,140,160,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(0,140,160,.055) 1px,transparent 1px),radial-gradient(circle at 80% 20%,rgba(0,229,255,.14),transparent 34%),radial-gradient(circle at 20% 80%,rgba(0,180,210,.1),transparent 38%);background-size:28px 28px,28px 28px,100% 100%,100% 100%;mask-image:linear-gradient(180deg,black,rgba(0,0,0,.9) 70%,transparent)}.about::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:var(--about-art);background-position:center;background-size:cover;background-repeat:no-repeat;opacity:.12;mix-blend-mode:multiply}.about__inner{position:relative;z-index:1;display:grid;grid-template-columns:.85fr 1.4fr;gap:clamp(50px,8vw,110px);align-items:start}.about__brand{position:sticky;top:120px}.about__logo-wrap{display:inline-flex;align-items:center;justify-content:center;width:150px;height:150px;margin-bottom:34px;border-radius:28px;background:linear-gradient(145deg,#09202a,#0b5261);box-shadow:0 18px 50px rgba(4,39,48,.18),0 0 35px rgba(0,229,255,.12)}.about__logo{width:clamp(90px,10vw,130px);height:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}.section-eyebrow{font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#008b98;margin-bottom:14px}.about__heading{font-family:var(--font-headline);font-size:clamp(42px,5vw,72px);line-height:.98;font-weight:400;letter-spacing:-.02em;color:#09202a;max-width:560px}.about__heading span{color:#00aebb}.about__lead{font-size:clamp(20px,2.1vw,28px);line-height:1.45;font-weight:500;color:#173a45;max-width:800px}.about__body{margin-top:24px;font-size:17px;line-height:1.8;color:#46616b;max-width:760px}.about__sections{margin-top:70px;display:grid;gap:58px}.about__block>p:not(.section-eyebrow),.about__future>p:not(.section-eyebrow){max-width:760px;font-size:16px;line-height:1.8;color:#46616b}.about__list{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 44px}.about__list strong{display:block;font-family:var(--font-display);font-size:19px;letter-spacing:.04em;color:#092b37}.about__list p{margin-top:8px;font-size:14px;line-height:1.7;color:#526d76}.about__future{padding-top:8px}.about__future p+p{margin-top:16px}@media(max-width:900px){.about__inner{grid-template-columns:1fr;gap:40px}.about__brand{position:static}.about__list{grid-template-columns:1fr}}
+.section-eyebrow {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  margin-bottom: 14px;
+}
+
+.about {
+  padding: var(--space-section) 0;
+  position: relative;
+  overflow: hidden;
+
+  /* Local, light palette for this section only -- everything else on
+     the page stays dark, so About reads as an intentional "bright"
+     beat in the rhythm rather than a continuation of the black/blue
+     sections around it. Text colors below are scoped to .about via
+     these custom properties. */
+  --about-ink: #071522;
+  --about-muted: #3c5568;
+  --about-accent: #007a99;
+
+  color: var(--about-ink);
+
+  /* Section 2: hands off from Hero's dark ending (--section-bg-1),
+     brightens within the first ~8%, then settles into a whitish base
+     that eases into Multiplayer's matching #cdeef6 starting stop at
+     the bottom. Kept to a single linear gradient + a hairline top seam
+     -- the earlier version also layered two large radial "corner
+     glow" gradients directly on this element, which balloon out of
+     control on a section this tall (their default size scales with
+     the element, not the viewport) and produced a muddy diagonal
+     patch instead of a soft tint. Any cyan glow now lives on the
+     fixed-size, absolutely-positioned .about__bg-art layer below,
+     which can't inherit that problem. */
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(0, 229, 255, 0.4) 50%, transparent 100%) top / 100% 1px no-repeat,
+    linear-gradient(
+      180deg,
+      var(--section-bg-1) 0%,
+      #ffffff 8%,
+      #eefbfd 42%,
+      #cdeef6 100%
+    );
+}
+
+.about .section-eyebrow {
+  color: var(--about-accent);
+}
+
+/* ---- Background art: image + logo, faded and soft-edged ---- */
+.about__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.about__bg-art {
+  position: absolute;
+  top: 10%;
+  right: 2%;
+  width: min(46%, 620px);
+  height: min(70%, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fixed-size glow behind the artwork -- unlike a section-relative
+   radial-gradient, this can't grow past the box it's declared on. */
+.about__bg-art::before {
+  content: '';
+  position: absolute;
+  inset: -12%;
+  background: radial-gradient(ellipse at center, rgba(0, 229, 255, 0.22), transparent 68%);
+  filter: blur(6px);
+}
+
+.about__bg-image {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.5;
+  /* Soft-fades the image's own edges so it reads as artwork bleeding
+     into the section rather than a pasted rectangle. */
+  mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, black 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, black 55%, transparent 100%);
+}
+
+.about__logo-mark {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 22px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-blue-deep), var(--color-bg));
+  box-shadow: 0 20px 44px -18px rgba(6, 20, 33, 0.55);
+}
+
+.about__logo {
+  height: 40px;
+  width: auto;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.55));
+}
+
+@media (max-width: 900px) {
+  .about__bg-art {
+    display: none;
+  }
+}
+
+/* ---- Copy ---- */
+.about__grid {
+  position: relative;
+  z-index: 1;
+}
+
+.about__content {
+  max-width: 640px;
+}
+
+.about__heading {
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--about-ink);
+}
+
+.about__lead {
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--about-ink);
+}
+
+.about__body {
+  margin-top: 16px;
+  max-width: 560px;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--about-muted);
+}
+
+.about__subheading {
+  margin-top: 34px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--about-ink);
+}
+
+.about__list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+}
+
+.about__list li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--about-muted);
+}
+
+.about__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  background: var(--about-accent);
+  box-shadow: 0 0 8px rgba(0, 122, 153, 0.45);
+}
+
+.about__list strong {
+  color: var(--about-ink);
+  font-weight: 700;
+}
