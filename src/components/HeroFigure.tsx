@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import fallbackImg from '../images/wraft_home.png'
 import './HeroFigure.css'
 
-// The hero animation is a 7-frame sequence: F0 → F6.
+// The hero animation is a 7-frame sequence: F0 → F6 → F0.
 // Keep the list explicit so a missing/renamed asset cannot silently change
 // the animation sequence or make the component fall back unexpectedly.
 const frameModules = import.meta.glob('../images/Home/Wraft_F*.png', {
@@ -15,9 +15,6 @@ const FRAMES: string[] = Array.from({ length: 7 }, (_, index) => {
   return frameModules[path]
 }).filter((url): url is string => Boolean(url))
 
-// Frame 0 is the "resting" pose and holds noticeably longer than the rest
-// of the sequence, giving the eye a beat to land on the hero before it
-// starts moving. Frames 1-6 then play at the original playback speed.
 const FIRST_FRAME_HOLD_MS = 1000
 const FRAME_DURATION_MS = 250
 
@@ -33,29 +30,24 @@ export default function HeroFigure() {
   useEffect(() => {
     if (prefersReducedMotion || frames.length <= 1) return
 
-    // Preload every frame before playback starts. This prevents a slow image
-    // request from making the sequence appear to skip or jump.
+    // Preload every frame so the loop never waits on an image request mid-sequence.
     const preloaded = frames.map((src) => {
       const image = new Image()
       image.src = src
       return image
     })
 
-    let timeoutId: number
+    let timeoutId: number | undefined
+    let cancelled = false
 
-    // Plays F0 → F(last) exactly once, then stops (holds on the last frame).
-    // F0 uses its own longer hold; every frame after that uses
-    // FRAME_DURATION_MS. Using a chained setTimeout (rather than
-    // setInterval) lets frame 0's duration differ from the rest and lets
-    // the chain simply not reschedule once it reaches the final frame.
+    // Continuously plays F0 → F6 → F0. Frame 0 gets a longer hold each cycle.
     function scheduleNextFrame(currentIndex: number) {
-      const isLastFrame = currentIndex >= frames.length - 1
-      if (isLastFrame) return
-
+      if (cancelled) return
       const holdTime = currentIndex === 0 ? FIRST_FRAME_HOLD_MS : FRAME_DURATION_MS
 
       timeoutId = window.setTimeout(() => {
-        const nextIndex = currentIndex + 1
+        if (cancelled) return
+        const nextIndex = (currentIndex + 1) % frames.length
         frameIndexRef.current = nextIndex
         setFrameIndex(nextIndex)
         scheduleNextFrame(nextIndex)
@@ -65,7 +57,8 @@ export default function HeroFigure() {
     scheduleNextFrame(frameIndexRef.current)
 
     return () => {
-      window.clearTimeout(timeoutId)
+      cancelled = true
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId)
       preloaded.forEach((image) => {
         image.onload = null
         image.onerror = null
@@ -78,14 +71,7 @@ export default function HeroFigure() {
   return (
     <div className="hero-figure" aria-hidden="true">
       <div className="hero-figure__grid" />
-
-      <img
-        src={frames[activeIndex]}
-        alt=""
-        className="hero-figure__img"
-        draggable={false}
-      />
-
+      <img src={frames[activeIndex]} alt="" className="hero-figure__img" draggable={false} />
       <svg className="hero-figure__nodes" viewBox="0 0 420 620">
         {NODES.map((n, i) => (
           <circle key={i} cx={n.x} cy={n.y} r={n.r} fill="var(--color-cyan-soft)" opacity={n.o} />
