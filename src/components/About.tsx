@@ -5,7 +5,7 @@ import './About.css'
 
 export default function About() {
   return (
-    <section id="about" className="about" style={{ '--about-art': `url("${gamePageDesign}")` } as React.CSSProperties}>
+    <section id="about" className="about" style={{ ['--about-art' as string]: `url("${gamePageDesign}")` }}>
       <div className="container about__inner">
         <Reveal className="about__brand"><div className="about__logo-wrap"><img src={logo} alt="Wraft" className="about__logo" /></div><p className="section-eyebrow">About Wraft</p><h2 className="about__heading">From Ekasi to the <span>Professional Stage.</span></h2></Reveal>
         <div className="about__content">
